@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8>
+	<title>CSS Shapes</title>
+	<link rel="stylesheet" href="css/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="js/jquery.effects.core.js"></script>
+	<style>
+		#menu li{
+			float: left;
+			padding-right: 20px;
+			heigth:20px;
+			list-style: none;
+		}
+		#menu li>div{
+			display: inline-block;
+			position: relative;
+		}
+		#menu li>div>div{
+			position: absolute;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<ul id="menu" style="-moz-user-select:none;-webkit-user-select:none;user-select:none;" unselectable='on'>
+		<li>Download</li>
+		<li>Documentation</li>
+		<li>Tutorials</li>
+		<li>Bug</li>
+		<li>Tracker</li>
+		<li>Discussion</li>
+	</ul>
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			$("#menu li").each(function(){
+				some = $(this).text();
+				var chah="";
+				for(i=0; i<some.length; i++){
+					chah += "<div><div>" + some[i] + "</div></div>";
+				}
+				$(this).html(chah);
+			});
+			$("#menu li>div").each(function(){
+				$(this).height($("div", this).height());
+				$(this).width($("div", this).width());
+			});
+			$("#menu li").click(function(){
+				$("div>div", this).each(function(){
+					pos = Math.floor((Math.random()*20)-10);
+					$(this).animate({
+						top: pos
+						}, 300, "easeInElastic", function(){
+							$(this).animate({
+								top: 0
+							}, 300, "easeOutElastic");
+					});
+				});
+			});
+			$("#menu").bdlclick(function(){
+				return false;
+			});
+		});
+	</script>
+</body>
+</html>
